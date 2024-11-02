@@ -1,5 +1,7 @@
 # Zip Code REST Server
 
+[![MIT License](https://shields.io/badge/License-MIT-blue)](https://github.com/ksubpb/zipcode_flask_rest/blob/main/LICENSE)
+
 ローカルファイルで指定された郵便番号（Zip Code）のCSVファイルを元に，REST APIを提供するサーバを作成します．
 Python の Flask 学習用に作成したものです．
 
@@ -23,7 +25,19 @@ $ docker run -d -p 5000:5000 --rm tamada/zipcode_rest:latest
 
 郵便番号データはデフォルトのものを利用します．
 
+### Demo
+
+起動後，郵便番号のデータを検索できます．
+
+![demo](assets/demo.gif)
+
 ## API
+
+### GET /zipcode/prefs/{prefecture}
+
+指定された都道府県の郵便番号の一覧をJSONで取得します．
+指定された都道府県が見つからない場合は，404 を返す．
+都道府県は，兵庫県や，東京都などのように，日本語で指定し，県や府は省略しないでください．
 
 ### GET /zipcode/{zipcode}
 
@@ -31,21 +45,21 @@ $ docker run -d -p 5000:5000 --rm tamada/zipcode_rest:latest
 郵便番号が見つからない場合は，404 を返し，
 見つかった場合は，200 および JSON をレスポンスのボディに入れて返します．
 
-### GET /zipcode/prefs/{prefecture}
-
-指定された都道府県の郵便番号の一覧をJSONで取得します．
-
 ### DELETE /zipcode/{zipcode}
 
 指定された郵便番号のデータを削除します．
 このリクエストは常に成功します．
+指定された郵便番号が見つかれば，そのデータを削除し，見つからなければ何もしません．
 
 ### POST /zipcode/{zipcode}
 
 指定された郵便番号のデータを追加します．
-郵便番号のデータは JSON 形式で，HTTP ボディに与えます．
+郵便番号のデータは JSON 形式で，HTTP リクエストボディに与えます．
+有効なデータは，`GET /zipcode/{zipcode}` で取得できるデータと同じです．
 
 ### PUT /zipcode/{zipcode}
 
 指定された郵便番号のデータを更新します．
-郵便番号のデータは JSON 形式で，HTTP ボディに与えます．
+郵便番号のデータは JSON 形式で，HTTP リクエストボディに与えます．
+有効なデータは，`GET /zipcode/{zipcode}` で取得できるデータと同じです．
+
