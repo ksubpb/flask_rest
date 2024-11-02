@@ -9,18 +9,27 @@ Python の Flask 学習用に作成したものです．
 
 ### Run the server
 
+以下のコマンドでサーバを起動します．`zipcode.csv` は郵便番号のデータが記載されたCSVファイルです．
+
 ```sh
-$ python3 zipcode_rest.py zipcode.csv
-Start server on port 5000
+python3 zipcode_rest.py zipcode.csv
 ```
 
 zipcode.csv は[日本郵政グループの提供する郵便番号データのCSVファイル](https://www.post.japanpost.jp/zipcode/download.html)です．
 データのフォーマットは[日本郵政グループのページに記載されています](https://www.post.japanpost.jp/zipcode/dl/utf-readme.html)．
 
-### Docker
+### :whale: Docker
 
 ```sh
-$ docker run -d -p 5000:5000 --rm tamada/zipcode_rest:latest
+docker run -it -p 5001:5001 -v $PWD/app:/app --rm tamada/zipcode_flask_rest:latest
+```
+
+郵便番号データはデフォルトのものを利用します．
+
+### :octopus: Docker compose
+
+```sh
+docker compose up
 ```
 
 郵便番号データはデフォルトのものを利用します．

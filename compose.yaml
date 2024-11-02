@@ -5,7 +5,7 @@ services:
       context: .               # Dockerfile のあるディレクトリ
       dockerfile: Dockerfile   # Dockerfile のファイル名
     ports:
-      - "5001:5000"            # ホスト側のポート:コンテナ側のポート
+      - "5001:5001"            # ホスト側のポート:コンテナ側のポート
     volumes:
       - ./app:/app             # ホスト側のディレクトリ:コンテナ側のディレクトリ
     command: python3 /app/zipcode_rest.py /app/data/utf_ken_all.csv # コンテナ起動時に，コンテナ内で実行するコマンド

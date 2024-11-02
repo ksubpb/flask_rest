@@ -50,4 +50,4 @@ def get_addresses_in_pref(pref):
         return jsonify({ "message": f"{pref}: Pref Not Found" }), 404
     return jsonify(([entry.to_json() for entry in result])), 200
 
-app.run(port = 5000, debug = True, host = "0.0.0.0")
+app.run(port = 5001, debug = True, host = "0.0.0.0")
