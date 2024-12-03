@@ -40,6 +40,23 @@ docker compose up
 
 ![demo](assets/demo.gif)
 
+上記のデモでは以下のコマンドを入力しています．
+
+```sh
+$ curl http://localhost:5001/zipcode/1000001     # 100-0001 を検索する
+$ curl http://localhost:5001/zipcode/prefs/東京都 # 東京都の郵便番号一覧を調べる
+$ curl -i http://localhost:5001/zipcode/1000001  # レスポンスヘッダも表示するようにする
+$ curl -i http://localhost:5001/zipcode/1000001 -X DELETE  # 削除する
+$ curl -i http://localhost:5001/zipcode/1000001 -X DELETE  # 何度実行しても結果は同じ
+$ curl http://localhost:5001/zipcode/1000001     # 削除したので，100-0001 は見つからない．
+$ # 100-0001 を登録し直すことにする．
+$ # curl で JSON を POST メソッドで送るとき，Content-Type の指定が必要．"
+$ curl http://localhost:5001/zipcode/1000001 -X POST -d '{"address": "千代田区千代田", "address_yomi": "チヨダクチヨダ", "pref": "東京都", "zipcode": 1000001 }' -H 'Content-Type: application/json'
+$ curl http://localhost:5001/zipcode/1000001  # 登録し直したので，今度は見つかる．"
+$ # 再度同じ情報を登録しようとすると，エラーになる．"
+$ curl http://localhost:5001/zipcode/1000001 -X POST -d '{"address": "千代田区千代田", "address_yomi": "チヨダクチヨダ", "pref": "東京都", "zipcode": 1000001 }' -H 'Content-Type: application/json'
+```
+
 ## API
 
 ### GET /zipcode/prefs/{prefecture}
